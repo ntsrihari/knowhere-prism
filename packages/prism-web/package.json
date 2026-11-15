@@ -1,0 +1,31 @@
+{
+  "name": "@knowhere/prism-web",
+  "version": "0.1.0",
+  "description": "Prism: Knowhere theme contracts, Material 3 token generation and CSS variables for the web.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" }
+  },
+  "bin": { "prism": "./dist/cli.js" },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "tsc -p tsconfig.json --noEmit && vitest run",
+    "golden": "UPDATE_GOLDEN=1 vitest run test/golden.test.ts"
+  },
+  "dependencies": {
+    "@material/material-color-utilities": "0.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.4",
+    "ajv": "8.20.0",
+    "typescript": "7.0.2",
+    "vite": "8.3.5",
+    "vitest": "5.0.5"
+  },
+  "engines": { "node": ">=22" }
+}

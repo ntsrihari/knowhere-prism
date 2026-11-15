@@ -1,0 +1,9 @@
+{
+  "schema": "knowhere.theme",
+  "schemaVersion": "0.1.0",
+  "seedColor": "#6750A4",
+  "colorScheme": "light",
+  "cornerRadius": 0,
+  "font": "roboto",
+  "density": "compact"
+}

@@ -1,0 +1,12 @@
+{
+  "name": "knowhere-prism",
+  "private": true,
+  "type": "module",
+  "workspaces": ["packages/prism-web", "preview"],
+  "scripts": {
+    "build": "npm run build -w @knowhere/prism-web && npm run build -w @knowhere/prism-preview",
+    "test": "npm run build -w @knowhere/prism-web && npm test -w @knowhere/prism-web && npm run build -w @knowhere/prism-preview && npm test -w @knowhere/prism-preview",
+    "golden": "npm run golden -w @knowhere/prism-web"
+  },
+  "engines": { "node": ">=22" }
+}

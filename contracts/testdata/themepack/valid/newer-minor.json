@@ -1,0 +1,36 @@
+{
+  "schema": "knowhere.themepack",
+  "schemaVersion": "0.2.0",
+  "id": "knowhere-core",
+  "name": "Knowhere Core",
+  "version": "1.0.0",
+  "themes": [
+    {
+      "schema": "knowhere.theme",
+      "schemaVersion": "0.1.0",
+      "name": "Knowhere Default",
+      "seedColor": "#6750A4",
+      "colorScheme": "dark",
+      "cornerRadius": 12,
+      "font": "inter",
+      "density": "comfortable",
+      "wallpaper": null,
+      "extensions": {}
+    }
+  ],
+  "publisher": {
+    "name": "x"
+  },
+  "wallpapers": [
+    {
+      "key": "aurora",
+      "name": "Aurora",
+      "mediaType": "image/webp",
+      "width": 3840,
+      "height": 2160,
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "dominantColor": "#203040",
+      "blurHash": "LEHV6nWB"
+    }
+  ]
+}

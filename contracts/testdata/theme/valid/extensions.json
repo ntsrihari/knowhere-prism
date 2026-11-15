@@ -1,0 +1,19 @@
+{
+  "schema": "knowhere.theme",
+  "schemaVersion": "0.1.0",
+  "name": "Knowhere Default",
+  "seedColor": "#6750A4",
+  "colorScheme": "dark",
+  "cornerRadius": 12,
+  "font": "inter",
+  "density": "comfortable",
+  "wallpaper": null,
+  "extensions": {
+    "prism": {
+      "tone": "x"
+    },
+    "milano": {
+      "materialYou": true
+    }
+  }
+}

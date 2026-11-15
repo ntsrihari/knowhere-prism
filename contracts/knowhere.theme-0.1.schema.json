@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.knowhere.invalid/knowhere.theme-0.1.schema.json",
+  "title": "knowhere.theme 0.1",
+  "description": "Provisional theme contract until Prism publishes its own (docs/CONTRACTS.md §2).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "schemaVersion", "seedColor", "colorScheme", "cornerRadius", "font", "density"],
+  "properties": {
+    "schema": { "const": "knowhere.theme" },
+    "schemaVersion": { "type": "string", "pattern": "^0\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$" },
+    "name": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "seedColor": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+    "colorScheme": { "enum": ["light", "dark"] },
+    "cornerRadius": { "type": "integer", "minimum": 0, "maximum": 32 },
+    "font": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,39}$" },
+    "density": { "enum": ["comfortable", "compact"] },
+    "wallpaper": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["ref"],
+          "properties": { "ref": { "type": "string", "pattern": "^builtin:[a-z0-9][a-z0-9-]{0,39}$" } }
+        }
+      ]
+    },
+    "extensions": {
+      "type": "object",
+      "maxProperties": 16,
+      "propertyNames": { "pattern": "^[a-z][a-z0-9-]{0,31}$" },
+      "additionalProperties": { "type": "object" }
+    }
+  }
+}

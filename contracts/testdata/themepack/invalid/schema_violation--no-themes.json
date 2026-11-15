@@ -1,0 +1,8 @@
+{
+  "schema": "knowhere.themepack",
+  "schemaVersion": "0.1.0",
+  "id": "knowhere-core",
+  "name": "Knowhere Core",
+  "version": "1.0.0",
+  "themes": []
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "knowhere.themepack",
+  "schemaVersion": "0.1.0",
+  "id": "knowhere-core",
+  "name": "Knowhere Core",
+  "version": "1.0.0",
+  "themes": [
+    {
+      "schema": "knowhere.theme",
+      "schemaVersion": "0.1.0",
+      "name": "Knowhere Default",
+      "seedColor": "#6750A4",
+      "colorScheme": "dark",
+      "cornerRadius": 12,
+      "font": "comic-sans",
+      "density": "comfortable",
+      "wallpaper": null,
+      "extensions": {}
+    }
+  ]
+}
