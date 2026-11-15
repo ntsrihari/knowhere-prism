@@ -1,6 +1,6 @@
 export * from './errors.js';
 export { Problems } from './check.js';
-export { parseStrictJson, JsonParseError, MAX_JSON_DEPTH, type JsonValue, type JsonObject } from './json.js';
+export { parseStrictJson, isJsonObject, JsonParseError, MAX_JSON_DEPTH, type JsonValue, type JsonObject } from './json.js';
 export * from './version.js';
 export {
   THEME_SCHEMA,

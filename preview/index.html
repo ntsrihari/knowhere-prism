@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+  <title>Prism Preview</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="bar">
+    <h1>Prism preview</h1>
+    <label>Sample
+      <select id="sample"></select>
+    </label>
+    <label class="file">Open file
+      <input id="file" type="file" accept="application/json,.json">
+    </label>
+  </header>
+  <main>
+    <section class="input">
+      <label for="source">Theme or theme pack JSON</label>
+      <textarea id="source" spellcheck="false" rows="14"></textarea>
+      <div class="row">
+        <button id="apply" type="button">Validate and preview</button>
+        <label>Pack theme <select id="packTheme" disabled></select></label>
+      </div>
+      <div id="status" role="status" aria-live="polite"></div>
+      <ul id="problems"></ul>
+    </section>
+    <section class="schemes">
+      <div class="scheme" id="light"><h2>Light</h2><div class="sample-ui"></div><div class="grid"></div></div>
+      <div class="scheme" id="dark"><h2>Dark</h2><div class="sample-ui"></div><div class="grid"></div></div>
+    </section>
+    <section class="scales">
+      <h2>Shape, density, font</h2>
+      <div id="scales"></div>
+    </section>
+  </main>
+</body>
+</html>

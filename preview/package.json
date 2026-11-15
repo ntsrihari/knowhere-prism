@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node build.mjs",
-    "test": "node --test test/"
+    "build": "tsc -p tsconfig.json && node build.mjs",
+    "test": "node --test test/csp.test.mjs"
   },
   "dependencies": {
     "@knowhere/prism-web": "0.1.0"
