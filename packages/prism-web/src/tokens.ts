@@ -1,4 +1,4 @@
-import { type DynamicScheme, Hct, SchemeTonalSpot, argbFromHex } from '@material/material-color-utilities';
+import { Hct, SchemeTonalSpot, argbFromHex } from '@material/material-color-utilities';
 import type { ColorSchemeName, Density, Theme } from './theme.js';
 
 /**
@@ -75,10 +75,15 @@ export function hexFromArgb(argb: number): string {
 
 /** Material 3 SchemeTonalSpot (spec 2021, contrast 0) colours for a seed. */
 export function schemeFromSeed(seedColor: string, mode: ColorSchemeName): ColorScheme {
-  // material-color-utilities 0.3.0 implements the 2021 spec only (DECISIONS.md D-03).
-  const scheme: DynamicScheme = new SchemeTonalSpot(Hct.fromInt(argbFromHex(seedColor)), mode === 'dark', SCHEME_CONTRAST_LEVEL);
+  // 0.4.0 defaults to spec 2021 (same call as Nexus frontend/src/lib/theme.ts). Its .d.ts
+  // files import extensionlessly, so view the scheme as a plain record of getters.
+  const scheme = new SchemeTonalSpot(Hct.fromInt(argbFromHex(seedColor)), mode === 'dark', SCHEME_CONTRAST_LEVEL) as unknown as Record<string, number>;
   const out = {} as ColorScheme;
-  for (const role of COLOR_ROLES) out[role] = hexFromArgb(scheme[role]);
+  for (const role of COLOR_ROLES) {
+    const v = scheme[role];
+    if (typeof v !== 'number') throw new Error(`material-color-utilities has no role ${role}`);
+    out[role] = hexFromArgb(v);
+  }
   return out;
 }
 
@@ -156,6 +161,25 @@ export interface PrismTokens {
   shape: ShapeScale;
   density: DensityTokens;
   typography: TypographyTokens;
+  /** Values for the Nexus M1 variables --radius-s/m/l and --space. */
+  nexus: NexusCompatTokens;
+}
+
+export interface NexusCompatTokens {
+  radiusS: number;
+  radiusM: number;
+  radiusL: number;
+  space: string;
+}
+
+/** Nexus M1 formulas: round(r/2), r, round(1.5r) (halves up); space 1rem / 0.75rem. */
+export function nexusCompatTokens(cornerRadius: number, density: Density): NexusCompatTokens {
+  return {
+    radiusS: Math.floor((cornerRadius + 1) / 2),
+    radiusM: cornerRadius,
+    radiusL: Math.floor((3 * cornerRadius + 1) / 2),
+    space: density === 'compact' ? '0.75rem' : '1rem',
+  };
 }
 
 export function generateTokens(theme: Theme, mode: ColorSchemeName = theme.colorScheme): PrismTokens {
@@ -165,5 +189,6 @@ export function generateTokens(theme: Theme, mode: ColorSchemeName = theme.color
     shape: shapeScale(theme.cornerRadius),
     density: densityTokens(theme.density),
     typography: typographyTokens(theme.font),
+    nexus: nexusCompatTokens(theme.cornerRadius, theme.density),
   };
 }

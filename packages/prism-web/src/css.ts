@@ -2,6 +2,8 @@ import type { ColorSchemeName, Theme } from './theme.js';
 import { COLOR_ROLES, SHAPE_ROLES, SPACING_ROLES, generateTokens, type PrismTokens } from './tokens.js';
 
 export const CSS_PREFIX = '--prism-';
+/** Colour roles are also emitted as --md-<role> (the names Nexus's web runtime already uses). */
+export const MD_PREFIX = '--md-';
 
 /** camelCase -> kebab-case ("surfaceContainerLowest" -> "surface-container-lowest"). */
 export function kebab(name: string): string {
@@ -18,6 +20,7 @@ export function cssFontFamily(stack: readonly string[]): string {
 /** Custom properties for a token set, in canonical order (TOKENS.md). */
 export function toCssVariables(tokens: PrismTokens): Record<string, string> {
   const vars: Record<string, string> = {};
+  for (const role of COLOR_ROLES) vars[`${MD_PREFIX}${kebab(role)}`] = tokens.color[role];
   for (const role of COLOR_ROLES) vars[`${CSS_PREFIX}${kebab(role)}`] = tokens.color[role];
   for (const s of SHAPE_ROLES) vars[`${CSS_PREFIX}shape-corner-${kebab(s)}`] = `${tokens.shape[s]}px`;
   for (const s of SPACING_ROLES) vars[`${CSS_PREFIX}space-${s}`] = `${tokens.density.spacing[s]}px`;
@@ -25,6 +28,12 @@ export function toCssVariables(tokens: PrismTokens): Record<string, string> {
   vars[`${CSS_PREFIX}density-scale`] = String(tokens.density.scale);
   vars[`${CSS_PREFIX}font-family`] = cssFontFamily(tokens.typography.fontFamily);
   vars[`${CSS_PREFIX}font-family-mono`] = cssFontFamily(tokens.typography.monoFontFamily);
+  // Nexus M1 compatibility (frontend/src/lib/theme.ts): same names and formulas.
+  vars['--radius-s'] = `${tokens.nexus.radiusS}px`;
+  vars['--radius-m'] = `${tokens.nexus.radiusM}px`;
+  vars['--radius-l'] = `${tokens.nexus.radiusL}px`;
+  vars['--space'] = tokens.nexus.space;
+  vars['--font'] = vars[`${CSS_PREFIX}font-family`] as string;
   return vars;
 }
 
